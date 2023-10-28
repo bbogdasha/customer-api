@@ -129,10 +129,6 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
     }
 
     @Test
-    void insertCustomer() {
-    }
-
-    @Test
     void deleteCustomerById() {
         //Given
         Customer customer = getCustomer();

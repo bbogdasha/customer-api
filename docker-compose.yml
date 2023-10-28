@@ -16,6 +16,19 @@ services:
       - postgres
     restart: unless-stopped
 
+  customer-api:
+    container_name: customer-api
+    image: bogdash/customer-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customer
+    ports:
+      - "8088:8080"
+    networks:
+      - postgres
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
   pgadmin:
     container_name: demo_pgadmin
     image: dpage/pgadmin4:7.8

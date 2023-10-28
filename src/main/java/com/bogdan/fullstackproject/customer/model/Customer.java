@@ -2,6 +2,8 @@ package com.bogdan.fullstackproject.customer.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(
         name = "customer",
@@ -87,5 +89,21 @@ public class Customer {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id)
+                && Objects.equals(name, customer.name)
+                && Objects.equals(email, customer.email)
+                && Objects.equals(age, customer.age);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, age);
     }
 }
