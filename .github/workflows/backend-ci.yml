@@ -31,7 +31,7 @@ jobs:
     steps:
       # actions/checkout@v2, which is the action that checked out
       # your repository to the computer that runs the action.
-      - uses: action/checkout@v3
+      - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin' #(required)
