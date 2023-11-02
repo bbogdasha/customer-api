@@ -2,6 +2,7 @@ package com.bogdan.fullstackproject.customer.repository;
 
 import com.bogdan.fullstackproject.AbstractTestcontainers;
 import com.bogdan.fullstackproject.customer.model.Customer;
+import com.bogdan.fullstackproject.customer.model.Gender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,8 +105,8 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
         return new Customer(
                 FAKER.name().fullName(),
                 FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID(),
-                25
-        );
+                25,
+                Gender.UNSELECTED);
     }
 
     private int getCustomerId(String email) {

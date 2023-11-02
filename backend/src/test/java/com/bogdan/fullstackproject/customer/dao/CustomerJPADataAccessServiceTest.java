@@ -1,6 +1,7 @@
 package com.bogdan.fullstackproject.customer.dao;
 
 import com.bogdan.fullstackproject.customer.model.Customer;
+import com.bogdan.fullstackproject.customer.model.Gender;
 import com.bogdan.fullstackproject.customer.repository.CustomerRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,7 +68,7 @@ class CustomerJPADataAccessServiceTest {
     @Test
     void insertCustomer() {
         //Given
-        Customer customer = new Customer(1, "Jill", "jill@gmail.com", 25);
+        Customer customer = new Customer(1, "Jill", "jill@gmail.com", 25, Gender.UNSELECTED);
 
         //When
         underTest.insertCustomer(customer);
@@ -103,7 +104,7 @@ class CustomerJPADataAccessServiceTest {
     @Test
     void updateCustomer() {
         //Given
-        Customer customer = new Customer(1, "Jill", "jill@gmail.com", 25);
+        Customer customer = new Customer(1, "Jill", "jill@gmail.com", 25, Gender.UNSELECTED);
 
         //When
         underTest.updateCustomer(customer);

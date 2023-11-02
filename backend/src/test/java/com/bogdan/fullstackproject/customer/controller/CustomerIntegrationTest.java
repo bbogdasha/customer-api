@@ -3,6 +3,7 @@ package com.bogdan.fullstackproject.customer.controller;
 import com.bogdan.fullstackproject.customer.model.Customer;
 import com.bogdan.fullstackproject.customer.model.CustomerRegistrationRequest;
 import com.bogdan.fullstackproject.customer.model.CustomerUpdateRequest;
+import com.bogdan.fullstackproject.customer.model.Gender;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.junit.jupiter.api.Test;
@@ -68,7 +69,7 @@ public class CustomerIntegrationTest {
                 .findFirst()
                 .orElseThrow();
 
-        Customer expectedCustomer = new Customer(request.name(), request.email(), request.age());
+        Customer expectedCustomer = new Customer(request.name(), request.email(), request.age(), request.gender());
 
         assertThat(customers).usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                         .contains(expectedCustomer);
@@ -166,7 +167,7 @@ public class CustomerIntegrationTest {
                 .findFirst()
                 .orElseThrow();
 
-        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest("newName", null, null);
+        CustomerUpdateRequest updateRequest = new CustomerUpdateRequest("Nick", null, null);
 
         webTestClient.put()
                 .uri(CUSTOMER_PATH + "/{id}", customerId)
@@ -188,7 +189,7 @@ public class CustomerIntegrationTest {
                 .returnResult()
                 .getResponseBody();
 
-        Customer expectedCustomer = new Customer(customerId, updateRequest.name(), request.email(), request.age());
+        Customer expectedCustomer = new Customer(customerId, updateRequest.name(), request.email(), request.age(), request.gender());
 
         assertThat(updatedCustomer).isEqualTo(expectedCustomer);
     }
@@ -200,7 +201,8 @@ public class CustomerIntegrationTest {
         String name = fakerName.fullName();
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
         int age = RANDOM.nextInt(1, 100);
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
 
-        return new CustomerRegistrationRequest(name, email, age);
+        return new CustomerRegistrationRequest(name, email, age, gender);
     }
 }

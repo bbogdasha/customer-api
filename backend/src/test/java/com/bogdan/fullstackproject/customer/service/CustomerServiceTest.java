@@ -4,6 +4,7 @@ import com.bogdan.fullstackproject.customer.dao.CustomerDao;
 import com.bogdan.fullstackproject.customer.model.Customer;
 import com.bogdan.fullstackproject.customer.model.CustomerRegistrationRequest;
 import com.bogdan.fullstackproject.customer.model.CustomerUpdateRequest;
+import com.bogdan.fullstackproject.customer.model.Gender;
 import com.bogdan.fullstackproject.exception.DuplicateResourceException;
 import com.bogdan.fullstackproject.exception.RequestValidationException;
 import com.bogdan.fullstackproject.exception.ResourceNotFoundException;
@@ -57,7 +58,7 @@ class CustomerServiceTest {
         //Given
         int customerId = 10;
 
-        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25);
+        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25, Gender.UNSELECTED);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -89,7 +90,7 @@ class CustomerServiceTest {
         when(customerDao.existsCustomerWithEmail(email)).thenReturn(false);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "Jill", "jill@gmail.com", 25);
+                "Jill", "jill@gmail.com", 25, Gender.FEMALE);
 
         //When
         underTest.addCustomer(request);
@@ -115,7 +116,7 @@ class CustomerServiceTest {
         when(customerDao.existsCustomerWithEmail(email)).thenReturn(true);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "Jill", "jill@gmail.com", 25);
+                "Jill", "jill@gmail.com", 25, Gender.FEMALE);
 
         //When
         assertThatThrownBy(() -> underTest.addCustomer(request))
@@ -161,7 +162,7 @@ class CustomerServiceTest {
         //Given
         int customerId = 10;
 
-        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25);
+        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25, Gender.FEMALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -190,7 +191,7 @@ class CustomerServiceTest {
         //Given
         int customerId = 10;
 
-        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25);
+        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25, Gender.FEMALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -216,7 +217,7 @@ class CustomerServiceTest {
         //Given
         int customerId = 10;
 
-        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25);
+        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25, Gender.FEMALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -245,7 +246,7 @@ class CustomerServiceTest {
         //Given
         int customerId = 10;
 
-        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25);
+        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25, Gender.FEMALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -271,7 +272,7 @@ class CustomerServiceTest {
         //Given
         int customerId = 10;
 
-        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25);
+        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25, Gender.FEMALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -294,7 +295,7 @@ class CustomerServiceTest {
         //Given
         int customerId = 10;
 
-        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25);
+        Customer customer = new Customer(customerId, "Jill", "jill@gmail.com", 25, Gender.FEMALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 

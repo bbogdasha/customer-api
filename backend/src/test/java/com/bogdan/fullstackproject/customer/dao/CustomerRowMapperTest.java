@@ -1,6 +1,7 @@
 package com.bogdan.fullstackproject.customer.dao;
 
 import com.bogdan.fullstackproject.customer.model.Customer;
+import com.bogdan.fullstackproject.customer.model.Gender;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
@@ -22,6 +23,7 @@ class CustomerRowMapperTest {
         when(resultSet.getString("name")).thenReturn("Jamila");
         when(resultSet.getString("email")).thenReturn("jamila@gmail.com");
         when(resultSet.getInt("age")).thenReturn(19);
+        when(resultSet.getString("gender")).thenReturn("FEMALE");
 
         // When
         Customer actual = customerRowMapper.mapRow(resultSet, 1);
@@ -31,8 +33,8 @@ class CustomerRowMapperTest {
                 1,
                 "Jamila",
                 "jamila@gmail.com",
-                19
-        );
+                19,
+                Gender.FEMALE);
 
         assertThat(actual).isEqualTo(expected);
     }
