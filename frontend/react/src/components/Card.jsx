@@ -33,10 +33,12 @@ export default function SocialProfileWithImage({id, name, email, age, gender, im
 	  <Box
 		maxW={'270px'}
 		maxH={'470px'}
+		minW={'270px'}
+		m={2}
 		w={'full'}
 		h={'full'}
 		bg={useColorModeValue('white', 'gray.800')}
-		boxShadow={'2xl'}
+		boxShadow={'lg'}
 		rounded={'md'}
 		overflow={'hidden'}>
 		<Tag borderRadius={"full"} position={"absolute"} mt={2} ml={2}>{id}</Tag>
