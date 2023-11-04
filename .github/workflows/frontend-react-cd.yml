@@ -37,4 +37,6 @@ jobs:
           chmod +x ../../.ci/build-publish.sh
           USERNAME=bogdash \
           REPO=customer-react \
-          TAG=${{ steps.build-number.outputs.BUILD_NUMBER }}
+          TAG=${{ steps.build-number.outputs.BUILD_NUMBER }} \
+          ../../.ci/build-publish.sh . \
+            --build-arg api_base_url=http://localhost:8088
