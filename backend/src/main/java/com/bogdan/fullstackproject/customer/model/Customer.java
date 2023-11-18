@@ -1,7 +1,12 @@
 package com.bogdan.fullstackproject.customer.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,7 +19,7 @@ import java.util.Objects;
                 )
         }
 )
-public class Customer {
+public class Customer implements UserDetails {
 
     @Id
     @SequenceGenerator(
@@ -28,41 +33,38 @@ public class Customer {
     )
     private Integer id;
 
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String name;
 
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String email;
 
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private Integer age;
 
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Column(nullable = false)
+    private String password;
 
     public Customer() {
     }
 
-    public Customer(Integer id, String name, String email, Integer age, Gender gender) {
+    public Customer(Integer id, String name, String email, String password, Integer age, Gender gender) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.password = password;
         this.age = age;
         this.gender = gender;
     }
 
-    public Customer(String name, String email, Integer age, Gender gender) {
+    public Customer(String name, String email, String password, Integer age, Gender gender) {
         this.name = name;
         this.email = email;
+        this.password = password;
         this.age = age;
         this.gender = gender;
     }
@@ -105,6 +107,41 @@ public class Customer {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     @Override

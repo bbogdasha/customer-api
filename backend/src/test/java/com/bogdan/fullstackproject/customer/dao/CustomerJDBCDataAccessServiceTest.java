@@ -299,6 +299,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         return new Customer(
                 FAKER.name().fullName(),
                 FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID(),
+                "password",
                 25,
                 Gender.UNSELECTED);
     }

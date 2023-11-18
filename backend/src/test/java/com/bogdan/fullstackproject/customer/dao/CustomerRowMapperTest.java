@@ -33,6 +33,7 @@ class CustomerRowMapperTest {
                 1,
                 "Jamila",
                 "jamila@gmail.com",
+                "password",
                 19,
                 Gender.FEMALE);
 

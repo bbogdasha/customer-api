@@ -69,7 +69,8 @@ public class CustomerIntegrationTest {
                 .findFirst()
                 .orElseThrow();
 
-        Customer expectedCustomer = new Customer(request.name(), request.email(), request.age(), request.gender());
+        Customer expectedCustomer = new Customer(request.name(), request.email(),
+                "password", request.age(), request.gender());
 
         assertThat(customers).usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                         .contains(expectedCustomer);
@@ -189,7 +190,8 @@ public class CustomerIntegrationTest {
                 .returnResult()
                 .getResponseBody();
 
-        Customer expectedCustomer = new Customer(customerId, updateRequest.name(), request.email(), request.age(), request.gender());
+        Customer expectedCustomer = new Customer(customerId, updateRequest.name(), request.email(),
+                "password", request.age(), request.gender());
 
         assertThat(updatedCustomer).isEqualTo(expectedCustomer);
     }
@@ -203,6 +205,6 @@ public class CustomerIntegrationTest {
         int age = RANDOM.nextInt(1, 100);
         Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
 
-        return new CustomerRegistrationRequest(name, email, age, gender);
+        return new CustomerRegistrationRequest(name, email, "password", age, gender);
     }
 }
