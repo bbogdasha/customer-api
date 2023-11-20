@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 
 import static java.time.temporal.ChronoUnit.MILLIS;
@@ -26,6 +27,10 @@ public class JWTUtil {
     }
 
     public String generateAccessToken(String subject, String ...scopes) {
+        return generateAccessToken(subject, Map.of("scopes", scopes));
+    }
+
+    public String generateAccessToken(String subject, List<String> scopes) {
         return generateAccessToken(subject, Map.of("scopes", scopes));
     }
 

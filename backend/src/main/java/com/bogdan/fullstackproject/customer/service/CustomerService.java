@@ -1,6 +1,8 @@
 package com.bogdan.fullstackproject.customer.service;
 
 import com.bogdan.fullstackproject.customer.dao.CustomerDao;
+import com.bogdan.fullstackproject.customer.dto.CustomerDTO;
+import com.bogdan.fullstackproject.customer.mapper.CustomerMapper;
 import com.bogdan.fullstackproject.customer.model.Customer;
 import com.bogdan.fullstackproject.customer.model.CustomerRegistrationRequest;
 import com.bogdan.fullstackproject.customer.model.CustomerUpdateRequest;
@@ -12,25 +14,34 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
 
     private final CustomerDao customerDao;
 
+    private final CustomerMapper customerMapper;
+
     private final PasswordEncoder passwordEncoder;
 
-    public CustomerService(@Qualifier("jpa") CustomerDao customerDao, PasswordEncoder passwordEncoder) {
+    public CustomerService(@Qualifier("jpa") CustomerDao customerDao,
+                           CustomerMapper customerMapper, PasswordEncoder passwordEncoder) {
         this.customerDao = customerDao;
+        this.customerMapper = customerMapper;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<Customer> getAllCustomers() {
-        return customerDao.selectAllCustomers();
+    public List<CustomerDTO> getAllCustomers() {
+        return customerDao.selectAllCustomers()
+                .stream()
+                .map(customerMapper)
+                .collect(Collectors.toList());
     }
 
-    public Customer getCustomer(Integer customerId) {
+    public CustomerDTO getCustomer(Integer customerId) {
         return customerDao.selectCustomerById(customerId)
+                .map(customerMapper)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Customer with id [%s] not found".formatted(customerId)));
     }

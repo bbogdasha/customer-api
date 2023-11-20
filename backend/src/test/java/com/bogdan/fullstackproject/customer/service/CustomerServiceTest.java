@@ -1,6 +1,8 @@
 package com.bogdan.fullstackproject.customer.service;
 
 import com.bogdan.fullstackproject.customer.dao.CustomerDao;
+import com.bogdan.fullstackproject.customer.dto.CustomerDTO;
+import com.bogdan.fullstackproject.customer.mapper.CustomerMapper;
 import com.bogdan.fullstackproject.customer.model.Customer;
 import com.bogdan.fullstackproject.customer.model.CustomerRegistrationRequest;
 import com.bogdan.fullstackproject.customer.model.CustomerUpdateRequest;
@@ -43,9 +45,11 @@ class CustomerServiceTest {
 
     private CustomerService underTest;
 
+    private final CustomerMapper customerMapper = new CustomerMapper();
+
     @BeforeEach
     void setUp() {
-        underTest = new CustomerService(customerDao, passwordEncoder);
+        underTest = new CustomerService(customerDao, customerMapper, passwordEncoder);
     }
 
     @Test
@@ -67,11 +71,13 @@ class CustomerServiceTest {
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
+        CustomerDTO expected = customerMapper.apply(customer);
+
         //When
-        Customer actual = underTest.getCustomer(10);
+        CustomerDTO actual = underTest.getCustomer(10);
 
         //Then
-        assertThat(actual).isEqualTo(customer);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
