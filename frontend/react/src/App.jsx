@@ -5,11 +5,11 @@ import {
     Spinner 
 } from '@chakra-ui/react'
 import SidebarWithHeader from './components/shared/SideBar'
-import SocialProfileWithImage from './components/Card'
+import SocialProfileWithImage from './components/customer/Card'
 import { useEffect, useState } from 'react'
 import { getCustomers } from './services/client'
 import { errorNotification } from './services/notification'
-import CreateCustomerDrawer from './components/CreateCustomerDrawer'
+import CreateCustomerDrawer from './components/customer/CreateCustomerDrawer'
 
 const App = () => {
 
