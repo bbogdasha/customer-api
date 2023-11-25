@@ -11,7 +11,7 @@ import { getCustomers } from './services/client'
 import { errorNotification } from './services/notification'
 import CreateCustomerDrawer from './components/customer/CreateCustomerDrawer'
 
-const App = () => {
+const Customer = () => {
 
     const [customers, setCustomers] = useState([])
     const [loading, setLoading] = useState(false)
@@ -89,4 +89,4 @@ const App = () => {
     )
 }
 
-export default App
+export default Customer
