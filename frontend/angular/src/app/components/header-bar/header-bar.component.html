@@ -1,0 +1,32 @@
+<div class="flex flex-column align-items-end border-bottom-1 border-gray-200 pt-3 pb-3">
+    <div class="flex flex-row align-items-center">
+        <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-bell"
+            class="p-button-rounded p-button-secondary p-button-text mr-3"
+        ></button>
+        <p-avatar
+            image="https://png.pngtree.com/png-clipart/20191122/original/pngtree-user-icon-isolated-on-abstract-background-png-image_5192004.jpg"
+            size="large"
+            shape="circle"
+            class="flex align-items-center mr-2"
+        ></p-avatar>
+        <div class="mr-3">
+            <p class="text-base mb-0 mt-1 text-gray-700">test&#64;bogdan.com</p>
+            <p class="text-sm mb-1 mt-0 text-gray-500">ROLE_ADMIN</p>
+        </div>
+        <div class="mr-3">
+            <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-angle-down"
+                class="p-button-secondary p-button-text"
+                (click)="menu.toggle($event)"
+            ></button>
+            <p-menu #menu [popup]="true" [model]="items"></p-menu>
+          </div>
+    </div>
+</div>
